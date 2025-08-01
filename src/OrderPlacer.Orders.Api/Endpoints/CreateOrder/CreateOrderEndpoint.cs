@@ -3,11 +3,7 @@ using OrderPlacer.Orders.Api.Data;
 using OrderPlacer.Orders.Api.Models;
 using Order = OrderPlacer.Orders.Api.Models.Order;
 
-namespace OrderPlacer.Orders.Api.Endpoints;
-
-public record CreateOrderRequest(List<CreateOrderItemRequest> Items);
-public record CreateOrderItemRequest(string ProductId, string ProductName, int Quantity, decimal UnitPrice);
-public record CreateOrderResponse(string Id, List<OrderItem> Items, decimal TotalAmount, OrderStatus Status, DateTime CreatedAt);
+namespace OrderPlacer.Orders.Api.Endpoints.CreateOrder;
 
 public class CreateOrderEndpoint : Endpoint<CreateOrderRequest, CreateOrderResponse>
 {

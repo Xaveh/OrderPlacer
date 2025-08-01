@@ -1,12 +1,11 @@
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using OrderPlacer.Orders.Api.Data;
+using OrderPlacer.Orders.Api.Endpoints.CreateOrder;
 
-namespace OrderPlacer.Orders.Api.Endpoints;
+namespace OrderPlacer.Orders.Api.Endpoints.GetOrder;
 
-public record GetOrderRequest(string Id);
-
-public class GetOrderEndpoint : Endpoint<GetOrderRequest, CreateOrderResponse>
+public class GetOrderEndpoint : Endpoint<GetOrderRequest, GetOrderResponse>
 {
     public override void Configure()
     {
@@ -28,7 +27,7 @@ public class GetOrderEndpoint : Endpoint<GetOrderRequest, CreateOrderResponse>
             return;
         }
 
-        await Send.OkAsync(new CreateOrderResponse(
+        await Send.OkAsync(new GetOrderResponse(
             order.Id,
             order.Items,
             order.TotalAmount,
