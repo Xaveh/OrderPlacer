@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.0"/>
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>7f98c07c-bb86-44fd-999f-258a7162ea5f</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.0"/>
+        <PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="9.4.0" />
+        <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.4.0" />
+        <PackageReference Include="Aspire.Hosting.Redis" Version="9.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OrderPlacer.Fulfillment.Service\OrderPlacer.Fulfillment.Service.csproj" />
+      <ProjectReference Include="..\OrderPlacer.Gateway\OrderPlacer.Gateway.csproj" />
+      <ProjectReference Include="..\OrderPlacer.Orders.Api\OrderPlacer.Orders.Api.csproj" />
+    </ItemGroup>
+
+</Project>
