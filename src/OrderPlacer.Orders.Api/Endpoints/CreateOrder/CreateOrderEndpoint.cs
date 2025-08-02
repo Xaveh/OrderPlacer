@@ -1,10 +1,13 @@
 using FastEndpoints;
+using MassTransit;
+using OrderPlacer.Contracts;
 using OrderPlacer.Orders.Api.Data;
 using Order = OrderPlacer.Orders.Api.Models.Order;
 
 namespace OrderPlacer.Orders.Api.Endpoints.CreateOrder;
 
-public class CreateOrderEndpoint(OrdersDbContext dbContext) : Endpoint<CreateOrderRequest>
+public class CreateOrderEndpoint(OrdersDbContext dbContext, IPublishEndpoint publishEndpoint)
+    : Endpoint<CreateOrderRequest>
 {
     public override void Configure()
     {
@@ -22,6 +25,9 @@ public class CreateOrderEndpoint(OrdersDbContext dbContext) : Endpoint<CreateOrd
 
         dbContext.Orders.Add(order);
         await dbContext.SaveChangesAsync(cancellationToken);
+
+        await publishEndpoint.Publish(new OrderCreated(order.Id, order.ProductName, order.Quantity, order.CreatedAt),
+            cancellationToken);
 
         await Send.OkAsync(cancellation: cancellationToken);
     }

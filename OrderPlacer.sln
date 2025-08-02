@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderPlacer.Orders.Api", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderPlacer.Fulfillment.Service", "src\OrderPlacer.Fulfillment.Service\OrderPlacer.Fulfillment.Service.csproj", "{BDCC7483-FD14-4E07-8702-B8065E8260A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderPlacer.Shared.Events", "src\OrderPlacer.Shared.Events\OrderPlacer.Shared.Events.csproj", "{D7D3F181-ABCC-49FE-BD7D-9017E30ABDC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderPlacer.Contracts", "src\OrderPlacer.Contracts\OrderPlacer.Contracts.csproj", "{0B7A417C-140A-4419-B764-C67782E197B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,7 +22,7 @@ Global
 		{D498D5F5-2BB8-4C8B-BFD1-53133244DB91} = {FB7D1CCF-B6AC-4730-9202-0639A839F255}
 		{2F29CED6-BBC9-4388-9933-8F6BAFB2190A} = {FB7D1CCF-B6AC-4730-9202-0639A839F255}
 		{BDCC7483-FD14-4E07-8702-B8065E8260A8} = {FB7D1CCF-B6AC-4730-9202-0639A839F255}
-		{D7D3F181-ABCC-49FE-BD7D-9017E30ABDC0} = {FB7D1CCF-B6AC-4730-9202-0639A839F255}
+		{0B7A417C-140A-4419-B764-C67782E197B9} = {FB7D1CCF-B6AC-4730-9202-0639A839F255}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4FC0D8D9-C2D0-4640-816E-9D1A89D5647F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -41,9 +41,9 @@ Global
 		{BDCC7483-FD14-4E07-8702-B8065E8260A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDCC7483-FD14-4E07-8702-B8065E8260A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDCC7483-FD14-4E07-8702-B8065E8260A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7D3F181-ABCC-49FE-BD7D-9017E30ABDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7D3F181-ABCC-49FE-BD7D-9017E30ABDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7D3F181-ABCC-49FE-BD7D-9017E30ABDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7D3F181-ABCC-49FE-BD7D-9017E30ABDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B7A417C-140A-4419-B764-C67782E197B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B7A417C-140A-4419-B764-C67782E197B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B7A417C-140A-4419-B764-C67782E197B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B7A417C-140A-4419-B764-C67782E197B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-namespace OrderPlacer.Orders.Api.Models;
+namespace OrderPlacer.Contracts;
 
 public enum OrderStatus
 {

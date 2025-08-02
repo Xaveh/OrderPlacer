@@ -12,7 +12,6 @@ var ordersApi = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api"
     .WithReference(rabbitmq);
 
 var fulfillmentService = builder.AddProject<Projects.OrderPlacer_Fulfillment_Service>("fulfillment-service")
-    .WithReference(cosmosdb)
     .WithReference(rabbitmq);
 
 // Gateway

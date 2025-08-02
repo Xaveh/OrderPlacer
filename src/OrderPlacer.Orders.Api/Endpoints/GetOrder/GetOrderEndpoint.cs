@@ -17,7 +17,7 @@ public class GetOrderEndpoint(OrdersDbContext dbContext) : Endpoint<GetOrderRequ
         var order = await dbContext.Orders
             .FirstOrDefaultAsync(o => o.Id == request.Id, cancellationToken);
 
-        if (order == null)
+        if (order is null)
         {
             await Send.NotFoundAsync(cancellationToken);
             return;

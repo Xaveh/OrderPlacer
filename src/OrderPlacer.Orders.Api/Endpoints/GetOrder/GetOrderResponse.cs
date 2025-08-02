@@ -1,4 +1,4 @@
-using OrderPlacer.Orders.Api.Models;
+using OrderPlacer.Contracts;
 
 namespace OrderPlacer.Orders.Api.Endpoints.GetOrder;
 
