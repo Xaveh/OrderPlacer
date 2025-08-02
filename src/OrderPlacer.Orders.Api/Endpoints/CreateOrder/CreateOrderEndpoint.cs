@@ -1,6 +1,5 @@
 using FastEndpoints;
 using OrderPlacer.Orders.Api.Data;
-using OrderPlacer.Orders.Api.Models;
 using Order = OrderPlacer.Orders.Api.Models.Order;
 
 namespace OrderPlacer.Orders.Api.Endpoints.CreateOrder;
@@ -17,13 +16,8 @@ public class CreateOrderEndpoint(OrdersDbContext dbContext) : Endpoint<CreateOrd
     {
         var order = new Order
         {
-            Items = request.Items.Select(i => new OrderItem
-            {
-                ProductId = i.ProductId,
-                ProductName = i.ProductName,
-                Quantity = i.Quantity,
-                UnitPrice = i.UnitPrice
-            }).ToList()
+            ProductName = request.ProductName,
+            Quantity = request.Quantity,
         };
 
         dbContext.Orders.Add(order);

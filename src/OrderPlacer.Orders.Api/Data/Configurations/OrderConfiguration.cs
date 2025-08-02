@@ -14,6 +14,13 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .ValueGeneratedNever()
             .HasMaxLength(36);
         
+        builder.Property(i => i.ProductName)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(i => i.Quantity)
+            .IsRequired();
+        
         builder.Property(e => e.Status)
             .HasConversion<string>()
             .HasMaxLength(40);
@@ -23,9 +30,5 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         
         builder.Property(e => e.UpdatedAt)
             .IsRequired(false);
-        
-        builder.OwnsMany(e => e.Items);
-
-        builder.Ignore(e => e.TotalAmount);
     }
 }

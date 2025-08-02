@@ -11,6 +11,5 @@ public class OrdersDbContext(DbContextOptions<OrdersDbContext> options) : DbCont
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new OrderConfiguration());
-        modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
     }
 }

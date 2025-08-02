@@ -13,8 +13,4 @@
         <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\OrderPlacer.Shared.Events\OrderPlacer.Shared.Events.csproj" />
-    </ItemGroup>
-
 </Project>
