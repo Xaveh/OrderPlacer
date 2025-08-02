@@ -5,7 +5,7 @@ using Order = OrderPlacer.Orders.Api.Models.Order;
 
 namespace OrderPlacer.Orders.Api.Endpoints.CreateOrder;
 
-public class CreateOrderEndpoint : Endpoint<CreateOrderRequest, CreateOrderResponse>
+public class CreateOrderEndpoint(OrdersDbContext dbContext) : Endpoint<CreateOrderRequest>
 {
     public override void Configure()
     {
@@ -13,13 +13,11 @@ public class CreateOrderEndpoint : Endpoint<CreateOrderRequest, CreateOrderRespo
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(CreateOrderRequest req, CancellationToken ct)
+    public override async Task HandleAsync(CreateOrderRequest request, CancellationToken cancellationToken)
     {
-        var dbContext = Resolve<OrdersDbContext>();
-
         var order = new Order
         {
-            Items = req.Items.Select(i => new OrderItem
+            Items = request.Items.Select(i => new OrderItem
             {
                 ProductId = i.ProductId,
                 ProductName = i.ProductName,
@@ -29,14 +27,8 @@ public class CreateOrderEndpoint : Endpoint<CreateOrderRequest, CreateOrderRespo
         };
 
         dbContext.Orders.Add(order);
-        await dbContext.SaveChangesAsync(ct);
+        await dbContext.SaveChangesAsync(cancellationToken);
 
-        await Send.OkAsync(new CreateOrderResponse(
-            order.Id,
-            order.Items,
-            order.TotalAmount,
-            order.Status,
-            order.CreatedAt
-        ), ct);
+        await Send.OkAsync(cancellation: cancellationToken);
     }
 }
