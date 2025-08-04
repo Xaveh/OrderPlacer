@@ -1,15 +1,13 @@
 using FastEndpoints;
 using MassTransit;
-using OrderPlacer.Orders.Api.Data;
-using Microsoft.EntityFrameworkCore;
 using OrderPlacer.Orders.Api.Consumers;
+using OrderPlacer.Orders.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddFastEndpoints();
-builder.Services.AddDbContext<OrdersDbContext>(options =>
-    options.UseCosmos(builder.Configuration.GetConnectionString("CosmosDB")!, "OrdersDatabase"));
+builder.AddCosmosDbContext<OrdersDbContext>("cosmosdb", "order-placer");
 
 builder.Services.AddMassTransit(busConfigurator =>
 {
@@ -19,12 +17,8 @@ builder.Services.AddMassTransit(busConfigurator =>
 
     busConfigurator.UsingRabbitMq((context, configurator) =>
     {
-        configurator.Host(new Uri(builder.Configuration["MessageBroker:Host"]!), h =>
-        {
-            h.Username(builder.Configuration["MessageBroker:Username"]!);
-            h.Password(builder.Configuration["MessageBroker:Password"]!);
-        });
-
+        var connectionString = builder.Configuration.GetConnectionString("rabbitmq");
+        configurator.Host(connectionString);
         configurator.ConfigureEndpoints(context);
     });
 });
