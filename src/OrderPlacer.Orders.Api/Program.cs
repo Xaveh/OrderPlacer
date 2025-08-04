@@ -27,4 +27,11 @@ var app = builder.Build();
 
 app.UseFastEndpoints();
 
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<OrdersDbContext>();
+    await dbContext.Database.EnsureCreatedAsync();
+}
+
 app.Run();

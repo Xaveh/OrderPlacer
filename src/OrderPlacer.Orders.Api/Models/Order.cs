@@ -14,7 +14,7 @@ public class Order
 
     public OrderStatus Status { get; set; } = OrderStatus.Created;
 
-    public DateTimeOffset CreatedAt { get; init; } = DateTimeOffset.Now;
+    public DateTimeOffset CreatedAt { get; init; } = DateTimeOffset.UtcNow;
 
     public DateTimeOffset? UpdatedAt { get; set; }
 }
