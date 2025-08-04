@@ -2,14 +2,14 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 // Infrastructure
 var rabbitmq = builder.AddRabbitMQ("rabbitmq");
-var cosmosdb = builder.AddAzureCosmosDB("cosmosdb")
-    .RunAsEmulator()
-    .AddCosmosDatabase("order-placer");
+var postgres = builder.AddPostgres("postgres")
+    .WithDataVolume()
+    .AddDatabase("order-placer");
 
 // Services
 var ordersApi = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api")
-    .WithReference(cosmosdb)
-    .WaitFor(cosmosdb)
+    .WithReference(postgres)
+    .WaitFor(postgres)
     .WithReference(rabbitmq)
     .WaitFor(rabbitmq);
 

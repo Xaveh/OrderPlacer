@@ -5,7 +5,7 @@ namespace OrderPlacer.Orders.Api.Models;
 
 public class Order
 {
-    public string Id { get; init; } = Guid.NewGuid().ToString();
+    public Guid Id { get; init; } = Guid.CreateVersion7();
 
     public required string ProductName { get; init; }
 

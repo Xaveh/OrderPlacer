@@ -1,3 +1,3 @@
 namespace OrderPlacer.Orders.Api.Endpoints.GetOrder;
 
-public record GetOrderRequest(string Id);
+public record GetOrderRequest(Guid Id);

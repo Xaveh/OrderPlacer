@@ -3,7 +3,7 @@ using OrderPlacer.Contracts;
 namespace OrderPlacer.Orders.Api.Endpoints.GetOrder;
 
 public record GetOrderResponse(
-    string Id,
+    Guid Id,
     string ProductName,
     int Quantity,
     OrderStatus Status,

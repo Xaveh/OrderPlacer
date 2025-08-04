@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddFastEndpoints();
-builder.AddCosmosDbContext<OrdersDbContext>("cosmosdb", "order-placer");
+builder.AddNpgsqlDbContext<OrdersDbContext>("order-placer");
 
 builder.Services.AddMassTransit(busConfigurator =>
 {
