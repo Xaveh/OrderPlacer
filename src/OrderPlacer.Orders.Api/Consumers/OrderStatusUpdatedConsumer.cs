@@ -2,10 +2,11 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using OrderPlacer.Contracts;
 using OrderPlacer.Orders.Api.Data;
+using OrderPlacer.Orders.Api.Services;
 
 namespace OrderPlacer.Orders.Api.Consumers;
 
-public class OrderStatusUpdatedConsumer(OrdersDbContext dbContext) : IConsumer<OrderStatusUpdated>
+public class OrderStatusUpdatedConsumer(OrdersDbContext dbContext, IOrderCacheService cacheService) : IConsumer<OrderStatusUpdated>
 {
     public async Task Consume(ConsumeContext<OrderStatusUpdated> context)
     {
@@ -22,5 +23,7 @@ public class OrderStatusUpdatedConsumer(OrdersDbContext dbContext) : IConsumer<O
 
         dbContext.Orders.Update(order);
         await dbContext.SaveChangesAsync(context.CancellationToken);
+
+        await cacheService.InvalidateOrderAsync(context.Message.OrderId, context.CancellationToken);
     }
 }

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.0"/>
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.0" />
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -11,15 +11,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.0"/>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.0" />
         <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.4.0" />
         <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.4.0" />
+        <PackageReference Include="Aspire.Hosting.Redis" Version="9.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\OrderPlacer.Fulfillment.Service\OrderPlacer.Fulfillment.Service.csproj" />
-      <ProjectReference Include="..\OrderPlacer.Gateway\OrderPlacer.Gateway.csproj" />
-      <ProjectReference Include="..\OrderPlacer.Orders.Api\OrderPlacer.Orders.Api.csproj" />
+        <ProjectReference Include="..\OrderPlacer.Fulfillment.Service\OrderPlacer.Fulfillment.Service.csproj" />
+        <ProjectReference Include="..\OrderPlacer.Gateway\OrderPlacer.Gateway.csproj" />
+        <ProjectReference Include="..\OrderPlacer.Orders.Api\OrderPlacer.Orders.Api.csproj" />
     </ItemGroup>
 
 </Project>
