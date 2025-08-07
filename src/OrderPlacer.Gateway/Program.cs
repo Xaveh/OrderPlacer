@@ -23,6 +23,7 @@ var app = builder.Build();
 
 app.UseRateLimiter();
 app.UseHttpsRedirection();
+app.UseRateLimiter();
 app.MapReverseProxy();
 
 app.Run();
