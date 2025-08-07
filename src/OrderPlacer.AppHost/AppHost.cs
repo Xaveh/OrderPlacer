@@ -8,21 +8,35 @@ var postgres = builder.AddPostgres("postgres")
     .AddDatabase("order-placer");
 
 // Services
-var ordersApi = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api")
+// As for today (2025.08.07.), .NET Aspire service discovery is not compatible with YARP load balancing, so WithReplicas option is not used here.
+// See: https://github.com/dotnet/aspire/issues/9486
+var ordersApi1 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api-1")
     .WithReference(postgres)
-    .WaitFor(postgres)
     .WithReference(rabbitmq)
-    .WaitFor(rabbitmq)
     .WithReference(redis)
-    .WaitFor(redis);
+    .WaitFor(postgres)
+    .WaitFor(rabbitmq)
+    .WaitFor(redis)
+    .WithHttpEndpoint(port: 7001, name: "orders-api-1-http");
 
-var fulfillmentService = builder.AddProject<Projects.OrderPlacer_Fulfillment_Service>("fulfillment-service")
+var ordersApi2 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api-2")
+    .WithReference(postgres)
+    .WithReference(rabbitmq)
+    .WithReference(redis)
+    .WaitFor(postgres)
+    .WaitFor(rabbitmq)
+    .WaitFor(redis)
+    .WithHttpEndpoint(port: 7002, name: "orders-api-2-http");
+
+builder.AddProject<Projects.OrderPlacer_Fulfillment_Service>("fulfillment-service")
     .WithReference(rabbitmq)
     .WaitFor(rabbitmq);
 
 // Gateway
 builder.AddProject<Projects.OrderPlacer_Gateway>("gateway")
-    .WithReference(ordersApi)
-    .WaitFor(ordersApi);
+    .WithReference(ordersApi1)
+    .WithReference(ordersApi2)
+    .WaitFor(ordersApi1)
+    .WaitFor(ordersApi2);
 
 builder.Build().Run();
