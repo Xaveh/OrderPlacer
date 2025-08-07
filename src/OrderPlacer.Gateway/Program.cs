@@ -11,6 +11,8 @@ builder.Services.AddRateLimiter(options =>
         o.Window = TimeSpan.FromSeconds(10);
         o.PermitLimit = 10;
     });
+
+    options.RejectionStatusCode = 429;
 });
 
 builder.Services.AddReverseProxy()
