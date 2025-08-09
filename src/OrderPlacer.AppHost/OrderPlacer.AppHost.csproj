@@ -19,6 +19,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\OrderPlacer.Fulfillment.Service\OrderPlacer.Fulfillment.Service.csproj" />
+        <ProjectReference Include="..\OrderPlacer.Fulfillment.ExternalApi\OrderPlacer.Fulfillment.ExternalApi.csproj" />
         <ProjectReference Include="..\OrderPlacer.Gateway\OrderPlacer.Gateway.csproj" />
         <ProjectReference Include="..\OrderPlacer.Orders.Api\OrderPlacer.Orders.Api.csproj" />
     </ItemGroup>

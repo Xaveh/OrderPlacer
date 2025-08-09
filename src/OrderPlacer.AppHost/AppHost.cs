@@ -3,7 +3,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 // Infrastructure
 var rabbitmq = builder.AddRabbitMQ("rabbitmq");
 var redis = builder.AddRedis("redis");
-var postgres = builder.AddPostgres("postgres")
+var postgres = builder.AddPostgres("postgres", port: 5432)
     .WithDataVolume()
     .AddDatabase("order-placer");
 
@@ -28,8 +28,14 @@ var ordersApi2 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api
     .WaitFor(redis)
     .WithHttpEndpoint(port: 7002, name: "orders-api-2-http");
 
+// External API for fulfillment
+var fulfillmentExternalApi = builder
+    .AddProject<Projects.OrderPlacer_Fulfillment_ExternalApi>("fulfillment-external-api")
+    .WithHttpEndpoint(port: 8000, name: "fulfillment-external-api-http");
+
 builder.AddProject<Projects.OrderPlacer_Fulfillment_Service>("fulfillment-service")
     .WithReference(rabbitmq)
+    .WithReference(fulfillmentExternalApi)
     .WaitFor(rabbitmq);
 
 // Gateway
