@@ -19,9 +19,10 @@ OrderPlacer is a sample .NET Aspire project designed to experiment with and show
     - `POST` endpoint for creating (placing) orders
     - Implemented with FastEndpoints / VerticalSlice architecture. 
   - **Fulfillment Service**: Order fulfillment processing service
-    - Communicates with Orders API via RabbitMQ messaging
-    - Simulates order processing workflow
-    - Updates order status from "Created" to "Processing"
+    - Consumes order creation events from RabbitMQ
+    - Communicates with the Fulfillment External API to process orders
+    - Updates order status
+  - **Fulfillment External API**: A simulated external service to showcase resilience policies (timeout, circuit breaker, retry)
 - **Infrastructure**:
   - **Redis**: Caching layer for the GET endpoint
   - **PostgreSQL**: Primary database for data persistence
@@ -30,7 +31,5 @@ OrderPlacer is a sample .NET Aspire project designed to experiment with and show
 
 ## Planned Features & TODOs
 
-- Implement circuit breaker pattern with Polly
-- Add retry policies for resilience
 - Integrate OpenTelemetry for distributed tracing
 - etc.
