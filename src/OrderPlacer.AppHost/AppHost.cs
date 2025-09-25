@@ -31,7 +31,7 @@ var ordersApi2 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api
 // External API for fulfillment
 var fulfillmentExternalApi = builder
     .AddProject<Projects.OrderPlacer_Fulfillment_ExternalApi>("fulfillment-external-api")
-    .WithHttpEndpoint(port: 8000, name: "fulfillment-external-api-http");
+    .WithHttpEndpoint(port: 7003, name: "fulfillment-external-api-http");
 
 builder.AddProject<Projects.OrderPlacer_Fulfillment_Service>("fulfillment-service")
     .WithReference(rabbitmq)

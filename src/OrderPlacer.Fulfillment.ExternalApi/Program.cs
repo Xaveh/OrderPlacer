@@ -7,7 +7,7 @@ var app = builder.Build();
 app.MapPost("/api/fulfillment", async (FulfillmentRequest request) =>
 {
     // Simulate processing time
-    await Task.Delay(5000);
+    await Task.Delay(2000);
 
     return Results.Ok(new { success = true, orderId = request.OrderId });
 });
