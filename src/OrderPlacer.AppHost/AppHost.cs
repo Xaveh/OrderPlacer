@@ -3,7 +3,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 // Infrastructure
 var rabbitmq = builder.AddRabbitMQ("rabbitmq");
 var redis = builder.AddRedis("redis");
-var postgres = builder.AddPostgres("postgres")
+var postgres = builder.AddPostgres("postgres", port: 5432)
     .WithDataVolume()
     .AddDatabase("order-placer");
 
@@ -17,7 +17,7 @@ var ordersApi1 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api
     .WaitFor(postgres)
     .WaitFor(rabbitmq)
     .WaitFor(redis)
-    .WithHttpEndpoint(port: 7001, name: "orders-api-1-http");
+    .WithHttpEndpoint();
 
 var ordersApi2 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api-2")
     .WithReference(postgres)
@@ -26,10 +26,16 @@ var ordersApi2 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api
     .WaitFor(postgres)
     .WaitFor(rabbitmq)
     .WaitFor(redis)
-    .WithHttpEndpoint(port: 7002, name: "orders-api-2-http");
+    .WithHttpEndpoint();
+
+// External API for fulfillment
+var fulfillmentExternalApi = builder
+    .AddProject<Projects.OrderPlacer_Fulfillment_ExternalApi>("fulfillment-external-api")
+    .WithHttpEndpoint();
 
 builder.AddProject<Projects.OrderPlacer_Fulfillment_Service>("fulfillment-service")
     .WithReference(rabbitmq)
+    .WithReference(fulfillmentExternalApi)
     .WaitFor(rabbitmq);
 
 // Gateway

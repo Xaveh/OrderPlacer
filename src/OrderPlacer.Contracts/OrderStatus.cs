@@ -5,5 +5,6 @@ public enum OrderStatus
     Created = 1,
     Processing = 2,
     Fulfilled = 3,
-    Cancelled = 4
+    Cancelled = 4,
+    Failed = 5
 }
