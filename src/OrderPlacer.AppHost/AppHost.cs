@@ -17,7 +17,7 @@ var ordersApi1 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api
     .WaitFor(postgres)
     .WaitFor(rabbitmq)
     .WaitFor(redis)
-    .WithHttpEndpoint(port: 7001, name: "orders-api-1-http");
+    .WithHttpEndpoint();
 
 var ordersApi2 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api-2")
     .WithReference(postgres)
@@ -26,12 +26,12 @@ var ordersApi2 = builder.AddProject<Projects.OrderPlacer_Orders_Api>("orders-api
     .WaitFor(postgres)
     .WaitFor(rabbitmq)
     .WaitFor(redis)
-    .WithHttpEndpoint(port: 7002, name: "orders-api-2-http");
+    .WithHttpEndpoint();
 
 // External API for fulfillment
 var fulfillmentExternalApi = builder
     .AddProject<Projects.OrderPlacer_Fulfillment_ExternalApi>("fulfillment-external-api")
-    .WithHttpEndpoint(port: 7003, name: "fulfillment-external-api-http");
+    .WithHttpEndpoint();
 
 builder.AddProject<Projects.OrderPlacer_Fulfillment_Service>("fulfillment-service")
     .WithReference(rabbitmq)

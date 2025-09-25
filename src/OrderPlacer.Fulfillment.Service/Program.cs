@@ -9,7 +9,7 @@ builder.Services.AddServiceDiscovery();
 
 builder.Services.AddHttpClient<IExternalFulfillmentService, ExternalFulfillmentService>(client =>
     {
-        client.BaseAddress = new Uri("http://localhost:7003");
+        client.BaseAddress = new Uri("http://fulfillment-external-api");
     })
     .AddServiceDiscovery()
     .AddStandardResilienceHandler(options =>
